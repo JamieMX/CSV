@@ -1,0 +1,24 @@
+import csv
+from Pet import Pet
+
+pets_csv = ("pets.csv")
+
+header_list = ["Pet Name", "Species", "Weight (KG)"]
+data_list = [["Terry", "Duck", "1"], ["Barney", "Dog", "20"], ["Nubbin", "Parrot", "0.5"]]
+with open(pets_csv, 'w', newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(header_list)
+    writer.writerows(data_list)
+
+pet_list = []
+with open(pets_csv, 'r') as file:
+    reader = csv.reader(file)
+    i=0
+    for row in reader:
+        if i == 0:
+            i += 1
+        else:
+            new_pet = Pet(row[0], row[1], row[2])
+            pet_list.append(new_pet)
+for pet in pet_list:
+    pet.summary()
